@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -28,7 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
 
@@ -188,7 +187,9 @@ fun statusBar(){
 fun calculationBar(){
 
     Column(modifier = Modifier.padding(end= 32.dp, start = 32.dp, top=16.dp, bottom = 16.dp)) {
-        CallMap()
+
+                CallMap()
+
         Row(modifier = Modifier
             .fillMaxWidth(),
             horizontalArrangement = Arrangement.Start,

@@ -13,9 +13,8 @@ import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun CallMap(){
-    val currentLocation by viewModel.location.collectAsState()
 
-    val yourlocation = LatLng(1.35, 103.87)
+    val yourlocation = LatLng(111.1,11.01)
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(yourlocation, 10f)
     }
