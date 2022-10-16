@@ -14,6 +14,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +35,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
             val scaffoldState = rememberScaffoldState()
             val scope = rememberCoroutineScope()
+            var isOpenDrawer =remember { mutableStateOf(true)}
 
 
                 Scaffold(
@@ -45,10 +48,11 @@ class MainActivity : ComponentActivity() {
                             navigationIcon = {
                                 IconButton(
                                     onClick = {
+    scope.launch {
+        scaffoldState.drawerState.open()
+    }
 
-                                        scope.launch {
-                                            scaffoldState.drawerState.open()
-                                        }
+
                                     },
                                 ) {
                                     Icon(
@@ -66,7 +70,17 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    DefaultPreview()
+                    if(selectedindex.value==0){
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        DefaultPreview()
+                    }else if(selectedindex.value==1){
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        AlarmScreen()
+                    }
 
 
                 }
@@ -76,15 +90,15 @@ class MainActivity : ComponentActivity() {
     }
 
 }
-
+var selectedindex= mutableStateOf(0)
 @Composable
 fun DrawerView() {
+
     val language = listOf("Home ", "Alarm Me", "Driver Login")
     LazyColumn {
 
         items(language.size){index->
-
-            AddDrawerContentView(title = language[index], selected = if (index==0)true else false)
+            AddDrawerContentView(title = language[index], index)
         }
         item {
             AddDrawerHeader(title = "Settings")
@@ -95,27 +109,29 @@ fun DrawerView() {
 
 }
 @Composable
-fun AddDrawerContentView(title: String,  selected: Boolean) {
+fun AddDrawerContentView(title: String, index : Int) {
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .clickable {}
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .clickable {
+
+                selectedindex.value = index
+            }
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+            ,
 
 
         ) {
 
         if (title.isNotEmpty()) {
-            if (selected)
-                Text(text = title, modifier = Modifier.weight(1f),
-                    color = Color.Black,style = TextStyle(
-                    fontWeight = FontWeight.Bold,
+            Text(
+                text = title, modifier = Modifier.weight(1f),
+                color = Color.Black, style = TextStyle(
                     fontSize = 14.sp,
                     color = Color.Black
-                ))
-            else
-                Text(text = title, modifier = Modifier.weight(1f),
-                    fontSize = 12.sp)
+                )
+            )
         }
 
     }
