@@ -165,7 +165,7 @@ fun AlarmScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(text = "Alert Before", fontSize = 15.sp, color= Color.White)
+                    Text(text = "Alert Before", fontSize = 20.sp, color= Color.White)
                 }
                 //DropDownMenu
                 Column(
@@ -186,7 +186,7 @@ fun AlarmScreen(
                             verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.End
                         ) {
-                            Text(text = selectedTime.value, fontSize = 15.sp, color= Color.White)
+                            Text(text = selectedTime.value, fontSize = 18.sp, color= Color.White)
                         }
                         Column(
                             modifier = Modifier
@@ -263,7 +263,7 @@ fun AlarmScreen(
         ) {
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor =  Color.Cyan),
+                    backgroundColor = MaterialTheme.colors.primaryVariant),
                 onClick = {  },
                 modifier = Modifier
                     .height(50.dp)
@@ -274,7 +274,7 @@ fun AlarmScreen(
                     disabledElevation = 0.dp
 
                 )) {
-                Text(text = "Done", fontSize = 15.sp)
+                Text(text = "Done", fontSize = 20.sp)
             }
         }
     }

@@ -13,10 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,6 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -50,7 +48,7 @@ class MainActivity : ComponentActivity() {
                                     onClick = {
                         scope.launch {
                             scaffoldState.drawerState.open()
-                         }
+                        }
 
 
                                     },
@@ -80,6 +78,11 @@ class MainActivity : ComponentActivity() {
                             scaffoldState.drawerState.close()
                         }
                         AlarmScreen()
+                    }else if(selectedindex.value==2){
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        SplashScreen()
                     }
 
 
