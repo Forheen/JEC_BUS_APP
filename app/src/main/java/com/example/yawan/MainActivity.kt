@@ -48,9 +48,9 @@ class MainActivity : ComponentActivity() {
                             navigationIcon = {
                                 IconButton(
                                     onClick = {
-    scope.launch {
-        scaffoldState.drawerState.open()
-    }
+                        scope.launch {
+                            scaffoldState.drawerState.open()
+                         }
 
 
                                     },
@@ -96,13 +96,13 @@ fun DrawerView() {
 
     val language = listOf("Home ", "Alarm Me", "Driver Login")
     LazyColumn {
-
-        items(language.size){index->
-            AddDrawerContentView(title = language[index], index)
-        }
         item {
             AddDrawerHeader(title = "Settings")
         }
+        items(language.size){index->
+            AddDrawerContentView(title = language[index], index)
+        }
+
 
 
     }
@@ -128,7 +128,7 @@ fun AddDrawerContentView(title: String, index : Int) {
             Text(
                 text = title, modifier = Modifier.weight(1f),
                 color = Color.Black, style = TextStyle(
-                    fontSize = 14.sp,
+                    fontSize = 20.sp,
                     color = Color.Black
                 )
             )
@@ -144,6 +144,7 @@ fun AddDrawerHeader(
     Card(
         elevation = 4.dp,
         modifier = Modifier
+            .padding(10.dp)
             .fillMaxWidth(),
         border = BorderStroke(1.dp, color = Color.Gray),
 
@@ -153,7 +154,7 @@ fun AddDrawerHeader(
             text = title,
             style = TextStyle(
                 fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
+                fontSize = 24.sp,
                 color = titleColor
             ),
             modifier = Modifier.padding(14.dp)

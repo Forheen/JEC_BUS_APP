@@ -28,12 +28,12 @@ fun AlarmScreen(
 ) {
     var selected = remember { mutableStateOf(arrayOf<Boolean>(true,true,true,true,true,true))}
     var days = remember { mutableStateOf(arrayOf<String>("M","T","W","Th","F","S"))}
-
     val repeat = remember { mutableStateOf(false)}
     var expanded by remember { mutableStateOf(false) }
     var expandDayList by remember { mutableStateOf(false) }
     val timeList = listOf("5 min", "10 min", "15 min", "20 min", "25 min", "30 min")
     val dayList = listOf("WeekDay", "Saturday")
+    val busTimeList = listOf("7:15 AM","7:40 AM", "10:05 AM","10:20 AM", "12:40 PM","1:40 PM","4:10 PM","04:30 PM","05:00 PM", "06:00 PM")
     val selectedTime = remember { mutableStateOf(timeList[0]) }
     var selectedDay = remember { mutableStateOf(dayList[0]) }
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
@@ -249,11 +249,8 @@ fun AlarmScreen(
             Text(text = selectedDay.value, fontSize = 24.sp)
         }
         //Routes Showing and Selecting area
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .height(250.dp)
-        ) {
-            RecyclerView()
+        busTimeList.forEach{
+            ListTime(time = it)
         }
         //Save Button
         Row(modifier = Modifier
@@ -266,11 +263,11 @@ fun AlarmScreen(
         ) {
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor =  Color.Yellow),
+                    backgroundColor =  Color.Cyan),
                 onClick = {  },
                 modifier = Modifier
-                    .height(70.dp)
-                    .fillMaxWidth(0.5f),
+                    .height(50.dp)
+                    .fillMaxWidth(0.4f),
                 elevation =  ButtonDefaults.elevation(
                     defaultElevation = 10.dp,
                     pressedElevation = 15.dp,
@@ -303,7 +300,7 @@ fun ListTime(time: String){
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(60.dp)
+                .height(80.dp)
                 .padding(10.dp)
 
 
@@ -368,14 +365,5 @@ fun ListTime(time: String){
 
 }
 
-@Composable
-fun RecyclerView(){
-    val timeList = listOf("7:15 AM","7:40 AM", "10:05 AM","10:20 AM", "12:40 PM","1:40 PM","4:10 PM","04:30 PM","05:00 PM", "06:00 PM")
-    LazyColumn(Modifier.padding(vertical = 4.dp)){
-        itemsIndexed(timeList){
-                _,time->
-            ListTime(time = time)
-        }
-    }
-}
+
 
