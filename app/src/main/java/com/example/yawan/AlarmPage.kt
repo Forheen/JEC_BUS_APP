@@ -266,7 +266,7 @@ fun AlarmScreen(
         ) {
             Button(
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor =  Color.Gray),
+                    backgroundColor =  Color.Yellow),
                 onClick = {  },
                 modifier = Modifier
                     .height(70.dp)
@@ -277,7 +277,7 @@ fun AlarmScreen(
                     disabledElevation = 0.dp
 
                 )) {
-                Text(text = "Done", fontSize = 20.sp)
+                Text(text = "Done", fontSize = 15.sp)
             }
         }
     }
