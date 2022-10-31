@@ -12,6 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,21 +24,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import com.google.android.gms.maps.model.LatLng
 import java.text.SimpleDateFormat
 import java.util.*
 
 
+
+
+
 //@Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun DefaultPreview(latitude : MutableState<Double>, longitude: MutableState<Double>, address: MutableState<String>) {
 
         Column ( modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())){
-
             heading()
             statusBar()
-            calculationBar()
+            calculationBar(latitude, longitude,address)
         }
 
 
@@ -167,7 +171,8 @@ fun statusBar(){
                     Text("Active",fontFamily = FontFamily.Serif)
 
                 }
-                Row(modifier = Modifier.fillMaxWidth(1f),
+                Row(
+                    modifier = Modifier.fillMaxWidth(1f),
                 ){
                     Text("Route:", modifier = Modifier.padding(end = 10.dp),fontFamily = FontFamily.Serif)
                     Text("Jorhat to JEC",fontFamily = FontFamily.Serif)
@@ -184,18 +189,18 @@ fun statusBar(){
 }
 
 @Composable
-fun calculationBar(){
+fun calculationBar(latitude: MutableState<Double>, longitude: MutableState<Double>, address: MutableState<String>){
 
     Column(modifier = Modifier.padding(end= 32.dp, start = 32.dp, top=16.dp, bottom = 16.dp)) {
 
-                CallMap()
+                CallMap(latitude,longitude)
 
         Row(modifier = Modifier
             .fillMaxWidth(),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically) {
             Text("Your location:", modifier = Modifier.padding(end = 10.dp))
-            Text("Jorhat Engineering College", fontWeight = FontWeight.Bold)
+            Text("${address.value}", fontWeight = FontWeight.Bold)
         }
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -206,11 +211,13 @@ fun calculationBar(){
             Text("GARMUR", fontWeight = FontWeight.Bold)
 
         }
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp),
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,) {
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Text("0", modifier = Modifier.padding(end=8.dp), fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.SansSerif,
                 fontSize = 20.sp)
@@ -220,10 +227,12 @@ fun calculationBar(){
 
 
         }
-        Row(modifier = Modifier
-            .fillMaxWidth(),
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,) {
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
             Text("5", modifier = Modifier.padding(end=8.dp), fontWeight = FontWeight.Bold,
                 fontFamily = FontFamily.SansSerif,
                 color = Color.Red,
@@ -237,7 +246,6 @@ fun calculationBar(){
         }
     }
 }
-
 
 @Composable
 fun StepsProgressBar(modifier: Modifier = Modifier, numberOfSteps: Int, currentStep: Int) {
