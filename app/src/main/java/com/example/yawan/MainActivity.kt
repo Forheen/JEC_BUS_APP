@@ -246,6 +246,11 @@ class MainActivity : ComponentActivity()  {
                     val postalCode: String = addresses[0].postalCode
                     val knownName: String = addresses[0].featureName
                         println("f location $address $city $state $postalCode $country $knownName")
+                //                    val intent = Intent(
+//                        Intent.ACTION_VIEW,
+//                        Uri.parse("http://maps.google.com/maps?saddr=${address.value}&daddr=Lakshmi Nagar,SIbsagar,45.345")
+//                    )
+//                   startActivity(intent)
                 }
 
 
@@ -261,7 +266,9 @@ class MainActivity : ComponentActivity()  {
         Location.distanceBetween(latitude.value, longitude.value,
             26.7462044,94.2483864, results);
         println("${results.get(0)} forheen hello ${latitude.value}")
+
     }
+
 
 }
 
